@@ -1,7 +1,7 @@
 <?php
     include_once("header.php");
 ?>
-
+<!-- maak een home pagina -->
 <div class="page home">
     <div class="container">
         <h1>Informatie</h1>

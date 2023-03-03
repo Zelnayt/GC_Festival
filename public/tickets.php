@@ -3,40 +3,23 @@
     include_once("../src/userFunctions.php");
     include_once("../src/databaseFunctions.php");
 
-    $tickets = db_getData("SELECT * FROM tickets");
-
-    // Check users login
-    $user = null;
-    if (isset($_POST['login']))
-    {
-        $user = getUser($_POST["email"],$_POST["wachtwoord"]);
-    }
+    $boten = db_getData("SELECT * FROM boten");
+    $dagdelen = db_getData("SELECT * FROM dagdelen");
 ?>
     <div class="page tickets">
         <div class="container">
-            <h1>Tickets bestellen</h1>
-            <?php if($user !== "No user found" && $user !== null){?>
-            <form action="orderConfirmation.php" method="post">
+            <h1>Huur uw boot</h1>
+            <form action="orderConfirmation.php" method="post" class="menuOrder">
                 <table>
-                <?php
-                    while($userData = $user->fetch_assoc())
-                    { ?>
-                        <td>Gebruikers ID:</td>
-                        <td><input type="number" name="userID" value="<?php echo $userData['id']; ?>"></td>
-                    <?php
-                    }
-                    ?>
                     <tr>
-                            
-                    </tr>
-                    <tr>
-                        <td>Tickets:</td>
+                        <td>Soort boot:</td>
                         <td>
-                            <select name="ticketSelect">
+                            <select name="boot">
                             <?php
-                                while ($ticket = $tickets->fetch_assoc())
+                                // fetch alle boten uit de database
+                                while ($boot = $boten->fetch(PDO::FETCH_ASSOC))
                             { ?>
-                                <option name="<?php echo $ticket['name']; ?>" value="<?php echo $ticket['id']; ?>"><?php echo $ticket['name']; echo " €"; echo $ticket['price']; ?></option> <!-- echo " €"; echo $ticket['price']; -->
+                                <option name="boten"  value="<?php echo $boot['bootNaam']; ?>"><?php echo $boot['bootNaam']; ?></option>
                             <?php
                                 }
                             ?>
@@ -44,29 +27,54 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Hoeveelheid:</td>
-                        <td><input type="number" name="amount" value="1"></td>
+                        <td>Selecteer dagdeel:</td>
+                        <td>
+                            <select name="dagdeel">
+                            <?php
+                                // fetch alle dagdelen uit de database
+                                while ($dagdeel = $dagdelen->fetch(PDO::FETCH_ASSOC))
+                            { ?>
+                                <option name="dagdelen" value="<?php echo $dagdeel['dagdeel']; ?>"><?php echo $dagdeel['dagdeel']; ?></option>
+                            <?php
+                                }
+                            ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Aantal personen:</td>
+                        <td>
+                            <input type="number" name="aantal" id="" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Selecteer datum:</td>
+                        <td>
+                            <input type="date" name="datum" id="" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vul uw naam in:</td>
+                        <td>
+                            <input type="text" name="naam" id="" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vul uw nummer in:</td>
+                        <td>
+                            <input type="text" name="nummer" id="" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vul uw email in:</td>
+                        <td>
+                            <input type="email" name="email" id="" required>
+                        </td>
                     </tr>
                 </table>
                 <br>
                 <input type="submit" name="order" value="Bestellen">
             </form>
-            <?php } else { ?>
-            <form action="#" method="post">
-                <table>
-                    <tr>
-                        <td>Email:</td>
-                        <td><input type="text" name="email"></td>
-                    </tr>
-                    <tr>
-                        <td>Wachtwoord:</td>
-                        <td><input type="text" name="wachtwoord"></td>
-                    </tr>
-                </table>
-                <br>
-                <input type="submit" name="login" value="Login">
-            </form>
-            <?php } ?>
             </div>
         </div>
         <?php

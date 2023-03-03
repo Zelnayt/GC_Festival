@@ -8,31 +8,29 @@
 
     <div class="page lineup">
         <div class="container">
-            <h1>Line-up</h1>
+            <h1>Assortiment</h1>
             <div class="artists">
                 <?php
                     try {
-
+                        // get data from database
                         $lineup = db_getData("SELECT * FROM lineup");
-                        
-                        if ($lineup -> num_rows > 0)
-                        {
-                            while($artist = $lineup->fetch_assoc())
+                            while($artist = $lineup->fetch(PDO::FETCH_ASSOC))
                             {
 
                         ?>
 
+                        <!-- laat alle images zien -->
                         <div class="artist">
-                            <img src="<?php echo IMAGE_FOLDER . "/" . $artist['artistImage']; ?>">
-                            <h3 class="artistName"><?php echo $artist['artistName']; ?></h3>
+                            <img src="<?php echo IMAGE_FOLDER . "/" . $artist['bootImage']; ?>">
+                            <h3 class="artistName"><?php echo $artist['bootName']; ?></h3>
                         </div>
                         
                         <?php
                                     }
-                                }
                         
                     } catch (PDOException $e)
                     {
+                        // print error message
                         die("Error!: " . $e->getMessage());
                     }
                 ?>

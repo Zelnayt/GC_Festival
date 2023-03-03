@@ -2,40 +2,28 @@
     include_once("header.php");
     include_once("../src/databaseFunctions.php");
 
-    // Check for order
-    if(isset($_POST['order'])){
-        $userID = $_POST['userID'];
-        $ticketID = $_POST['ticketSelect'];
-        $amount = $_POST['amount'];
+    if (isset($_POST['order']))
+    {
+        // check of de user al besteld heeft
+        $boot = $_POST['boot'];
+        $dagdeel = $_POST['dagdeel'];
+        $aantal = $_POST['aantal'];
+        $datum = $_POST['datum'];
+        $naam = $_POST['naam'];
+        $nummer = $_POST['nummer'];
+        $email = $_POST['email'];
 
-
-        $order = db_insertData("INSERT INTO orders (userID,ticketID,amount) VALUES ('$userID','$ticketID','$amount')");
-        $newOrder = db_getData("SELECT * FROM orders INNER JOIN tickets ON orders.ticketID = tickets.id WHERE orders.id = " . $order);
+        db_insertData("INSERT INTO orders (boot,dagdeel,aantal_personen,datum,naam,nummer,email) 
+                        VALUES ('$boot','$dagdeel','$aantal','$datum','$naam','$nummer','$email')");
     }
 ?>
 
 
     <div class="page orderConfirmation">
         <div class="container">
-            <h1>Bedankt voor de bestelling!</h1>
-            <table class="orderOverview" border="1">
-                <tr>
-                    <th>Ticket</th>
-                    <th>Aantal</th>
-                    <th>Prijs</th>
-                </tr>
-                <tr>
-                    <?php
-                    while($orderData = $newOrder->fetch_assoc()){
-                        ?>
-                        <td><?php echo $ticketID; ?></td>
-                        <td><?php echo $amount; ?></td>
-                        <td>€ <?php echo $amount * $orderData['price']; ?></td>
-                        <?php
-                    }
-                    ?>
-                </tr>
-            </table>
+            <h1>Bedankt voor uw reservering!</h1>
+            <p>Uw reservering is succesvol geplaatst. U krijgt een bevestiging per email.</p>
+            <p>U kunt nu terug naar de <a href="index.php">homepagina</a>.</p>
         </div>
     </div>
     

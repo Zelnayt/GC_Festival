@@ -71,7 +71,7 @@ nav ul.menu li a{
 section.hero{
     height: 400px;
     width: 100%;
-    background-image: url("../images/header.jpg");
+    background-image: url("../images/header2.jpg");
     background-size: cover;
     background-position: bottom;
     display: flex;
@@ -84,7 +84,7 @@ section.hero .content{
     justify-content: center;
     align-items: center;
     flex-flow: column;
-    color: #fff;
+    color: black;
 }
 
 section.hero .content h1{
@@ -176,4 +176,53 @@ footer .container .column li a{
 .label
 {
     width: 150px;
+}
+
+#beheerTable
+{
+    margin: 0 auto;
+    height: auto;
+    font: normal 12px sans-serif;
+    text-align: left;
+    border: 2px solid #000;
+}
+
+#beheerTable th
+{
+    background: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: 2px solid #000;
+}
+
+#beheerTable td
+{
+    padding: 10px 20px;
+    border: 2px solid #000;
+}
+
+.beheerContainer
+{
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    height: auto;
+    font: normal 12px sans-serif;
+    text-align: left;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.menuOrder
+{
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    height: auto;
+    font: normal 12px sans-serif;
+    text-align: left;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
